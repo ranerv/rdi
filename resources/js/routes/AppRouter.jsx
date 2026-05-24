@@ -18,7 +18,10 @@ export const AppRouter = () => {
   return (
     <Routes>
       {/* Public routes */}
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={
+        isAuthenticated ? <Navigate to="/admin" /> : <LoginPage />
+      } />
+      <Route path="/login" element={<Navigate to="/" replace />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
       {/* Protected routes - Super Admin */}
@@ -51,10 +54,8 @@ export const AppRouter = () => {
         }
       />
 
-      {/* Default redirect */}
-      <Route path="/" element={
-        isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
-      } />
+      {/* Catch-all redirect */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
