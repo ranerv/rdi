@@ -3,6 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
+Route::get('/{any?}', function () {
     return Inertia::render('Auth/Login', ['component' => 'LoginPage']);
-})->name('login');
+})->where('any', '.*')->name('login');
